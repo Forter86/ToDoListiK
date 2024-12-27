@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyTodoList.MainPage"
+             Title="Мой список дел">
+
+    <VerticalStackLayout Padding="20">
+        <HorizontalStackLayout>
+            <Entry x:Name="NewTodoEntry" Placeholder="Новая задача" HorizontalOptions="FillAndExpand"/>
+            <Button Text="Добавить" Clicked="AddTodoButton_Clicked"/>
+        </HorizontalStackLayout>
+
+        <CollectionView x:Name="TodoListCollectionView" Margin="0,20,0,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label  FontSize="16" Text="{Binding TitleText}" />
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsCompleted, Mode=TwoWay}"
+                                 />
+                        <Button Grid.Column="2" Text="Удалить" Clicked="DeleteTodoButton_Clicked"
+                                    CommandParameter="{Binding .}"
+                                />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>
